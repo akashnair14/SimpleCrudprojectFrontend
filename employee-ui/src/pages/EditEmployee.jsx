@@ -21,6 +21,7 @@ export default function EditEmployee() {
 
     // Initial state with empty strings to avoid uncontrolled inputs
     const [form, setForm] = useState({ id: "", name: "", department: "", salary: "" });
+    const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
@@ -76,18 +77,34 @@ export default function EditEmployee() {
         load();
     }, [id, navigate, showToast]);
 
+    const validate = () => {
+        let tempErrors = {};
+        if (!form.name.trim()) tempErrors.name = "Full Name is required";
+        if (!form.department) tempErrors.department = "Department is required";
+
+        const rawSalary = form.salary.toString().replace(/,/g, '');
+        if (!rawSalary) {
+            tempErrors.salary = "Salary is required";
+        } else if (isNaN(rawSalary) || parseFloat(rawSalary) <= 0) {
+            tempErrors.salary = "Please enter a valid positive salary";
+        }
+
+        setErrors(tempErrors);
+        return Object.keys(tempErrors).length === 0;
+    };
+
     const submit = async () => {
-        if (!form.name || !form.department || !form.salary) {
-            showToast("Please fill in all required fields", "warning");
+        if (!validate()) {
+            showToast("Please correct the errors in the form", "error");
             return;
         }
         setSaving(true);
         try {
             const payload = {
                 id: parseInt(form.id),
-                name: form.name,
+                name: form.name.trim(),
                 department: form.department,
-                salary: parseFloat(form.salary.replace(/,/g, '')) || 0
+                salary: parseFloat(form.salary.toString().replace(/,/g, '')) || 0
             };
             await updateEmployee(payload);
             showToast("Employee updated successfully!", "success");
@@ -126,7 +143,7 @@ export default function EditEmployee() {
                     {/* Decorative Background Blob */}
                     <Box sx={{
                         position: 'absolute', top: -50, right: -50, width: 200, height: 200,
-                        background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(0,0,0,0) 70%)',
+                        background: 'radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(0,0,0,0) 70%)',
                         borderRadius: '50%', pointerEvents: 'none'
                     }} />
 
@@ -136,8 +153,8 @@ export default function EditEmployee() {
                                 <Box sx={{
                                     p: 1.5,
                                     borderRadius: 3,
-                                    background: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
-                                    boxShadow: "0 4px 12px rgba(109, 40, 217, 0.3)",
+                                    background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                                    boxShadow: "0 4px 12px rgba(16, 185, 129, 0.25)",
                                     display: 'flex', color: 'white'
                                 }}>
                                     <EditTwoToneIcon fontSize="medium" />
@@ -157,7 +174,12 @@ export default function EditEmployee() {
                             <TextField
                                 label="Full Name"
                                 value={form.name}
-                                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                                onChange={(e) => {
+                                    setForm({ ...form, name: e.target.value });
+                                    if (errors.name) setErrors({ ...errors, name: null });
+                                }}
+                                error={!!errors.name}
+                                helperText={errors.name}
                                 fullWidth
                                 variant="outlined"
                                 InputProps={{
@@ -169,7 +191,12 @@ export default function EditEmployee() {
                                 select
                                 label="Department"
                                 value={form.department}
-                                onChange={(e) => setForm({ ...form, department: e.target.value })}
+                                onChange={(e) => {
+                                    setForm({ ...form, department: e.target.value });
+                                    if (errors.department) setErrors({ ...errors, department: null });
+                                }}
+                                error={!!errors.department}
+                                helperText={errors.department}
                                 fullWidth
                                 variant="outlined"
                                 InputProps={{
@@ -186,10 +213,14 @@ export default function EditEmployee() {
                             <TextField
                                 label="Annual Salary"
                                 value={form.salary}
-                                onChange={handleSalaryChange}
+                                onChange={(e) => {
+                                    handleSalaryChange(e);
+                                    if (errors.salary) setErrors({ ...errors, salary: null });
+                                }}
+                                error={!!errors.salary}
+                                helperText={errors.salary || "Annual salary in INR (Indian Rupee)"}
                                 fullWidth
                                 variant="outlined"
-                                helperText="Annual salary in INR (Indian Rupee)"
                                 InputProps={{
                                     startAdornment: <InputAdornment position="start">
                                         <Typography fontWeight="700" color="text.primary">₹</Typography>
@@ -220,11 +251,11 @@ export default function EditEmployee() {
                                 startIcon={<SaveTwoToneIcon />}
                                 sx={{
                                     flex: 2,
-                                    background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-                                    boxShadow: "0 4px 14px 0 rgba(37, 99, 235, 0.4)",
+                                    background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                                    boxShadow: "0 4px 14px 0 rgba(16, 185, 129, 0.4)",
                                     "&:hover": {
-                                        background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
-                                        boxShadow: "0 6px 20px rgba(37, 99, 235, 0.6)",
+                                        background: "linear-gradient(135deg, #059669 0%, #047857 100%)",
+                                        boxShadow: "0 6px 20px rgba(16, 185, 129, 0.6)",
                                     }
                                 }}
                             >

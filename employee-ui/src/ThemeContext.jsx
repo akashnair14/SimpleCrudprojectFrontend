@@ -29,46 +29,46 @@ export const ThemeProvider = ({ children }) => {
                 palette: {
                     mode,
                     primary: {
-                        main: mode === "dark" ? "#60a5fa" : "#3b82f6", // Calm Blue
+                        main: mode === "dark" ? "#10b981" : "#059669", // Emerald Green
                         contrastText: "#ffffff",
                     },
                     secondary: {
-                        main: "#8b5cf6", // Soft Purple
+                        main: "#6366f1", // Electric Indigo
                     },
                     background: {
-                        default: mode === "dark" ? "#0f172a" : "#f8fafc",
-                        paper: mode === "dark" ? "rgba(30, 41, 59, 0.4)" : "rgba(255, 255, 255, 0.6)",
+                        default: mode === "dark" ? "#020617" : "#f8fafc", // Deeper Slate Dark
+                        paper: mode === "dark" ? "rgba(15, 23, 42, 0.6)" : "rgba(255, 255, 255, 0.7)",
                     },
                     text: {
-                        primary: mode === "dark" ? "#f1f5f9" : "#1e293b", // Slate 100 / Slate 800
-                        secondary: mode === "dark" ? "#94a3b8" : "#64748b", // Slate 400 / Slate 500
+                        primary: mode === "dark" ? "#f8fafc" : "#0f172a",
+                        secondary: mode === "dark" ? "#94a3b8" : "#475569",
                     },
                     action: {
-                        hover: mode === "dark" ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.04)",
-                        selected: mode === "dark" ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.08)",
+                        hover: mode === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.03)",
+                        selected: mode === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.06)",
                     },
                 },
                 shape: {
-                    borderRadius: 16,
+                    borderRadius: 12,
                 },
                 typography: {
-                    fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
-                    h3: { fontWeight: 800, letterSpacing: "-0.02em" },
-                    h4: { fontWeight: 700, letterSpacing: "-0.01em" },
-                    h5: { fontWeight: 600, letterSpacing: "0em" },
-                    h6: { fontWeight: 600 },
-                    subtitle1: { fontWeight: 500, lineHeight: 1.5 },
-                    body1: { lineHeight: 1.6 },
-                    button: { textTransform: "none", fontWeight: 600, letterSpacing: "0.01em" },
+                    fontFamily: '"Outfit", "Inter", sans-serif', // Cleaner modern font
+                    h3: { fontWeight: 900, letterSpacing: "-0.04em" },
+                    h4: { fontWeight: 850, letterSpacing: "-0.03em" },
+                    h5: { fontWeight: 800, letterSpacing: "-0.02em" },
+                    h6: { fontWeight: 700 },
+                    subtitle1: { fontWeight: 600, lineHeight: 1.4 },
+                    body1: { lineHeight: 1.5 },
+                    button: { textTransform: "none", fontWeight: 700, letterSpacing: "0.02em" },
                 },
                 components: {
                     MuiCssBaseline: {
                         styleOverrides: {
                             body: {
                                 backgroundImage: mode === "dark"
-                                    ? "radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%), radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%)"
-                                    : "radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%), radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%)",
-                                backgroundColor: mode === "dark" ? "#0f172a" : "#f8fafc", // Fallback
+                                    ? "radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.12), transparent 40%), radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.12), transparent 40%)"
+                                    : "radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.05), transparent 40%), radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.05), transparent 40%)",
+                                backgroundColor: mode === "dark" ? "#020617" : "#f8fafc",
                                 backgroundAttachment: "fixed",
                             },
                         },
@@ -76,14 +76,14 @@ export const ThemeProvider = ({ children }) => {
                     MuiPaper: {
                         styleOverrides: {
                             root: {
-                                backdropFilter: "blur(20px) saturate(180%)",
-                                borderRadius: 24,
+                                backdropFilter: "blur(24px) saturate(200%)",
+                                borderRadius: 16,
                                 border: mode === "dark"
-                                    ? "1px solid rgba(255, 255, 255, 0.08)"
-                                    : "1px solid rgba(255, 255, 255, 0.6)",
+                                    ? "1px solid rgba(255, 255, 255, 0.06)"
+                                    : "1px solid rgba(0, 0, 0, 0.05)",
                                 boxShadow: mode === "dark"
-                                    ? "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
-                                    : "0 20px 40px -12px rgba(12, 74, 110, 0.08)",
+                                    ? "0 20px 40px -15px rgba(0, 0, 0, 0.7)"
+                                    : "0 15px 35px -12px rgba(0, 0, 0, 0.08)",
                                 backgroundImage: "none",
                             },
                         },
@@ -92,27 +92,25 @@ export const ThemeProvider = ({ children }) => {
                         styleOverrides: {
                             root: {
                                 background: mode === "dark"
-                                    ? "linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.4) 100%)"
-                                    : "linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%)",
+                                    ? "linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%)"
+                                    : "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 100%)",
                             },
                         },
                     },
                     MuiButton: {
                         styleOverrides: {
                             root: {
-                                borderRadius: 12,
-                                padding: "10px 24px",
+                                borderRadius: 10,
+                                padding: "8px 20px",
                                 boxShadow: "none",
-                                transition: "all 0.2s ease-in-out",
+                                transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
                             },
                             containedPrimary: {
-                                background: mode === "dark"
-                                    ? "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)"
-                                    : "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-                                boxShadow: "0 10px 20px -10px rgba(37, 99, 235, 0.5)",
+                                background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                                boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)",
                                 "&:hover": {
-                                    boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.6)",
-                                    transform: "translateY(-2px)",
+                                    boxShadow: "0 8px 16px rgba(16, 185, 129, 0.3)",
+                                    transform: "translateY(-1.5px)",
                                 },
                             },
                             outlined: {
@@ -127,7 +125,7 @@ export const ThemeProvider = ({ children }) => {
                                 borderBottom: mode === "dark"
                                     ? "1px solid rgba(255, 255, 255, 0.06)"
                                     : "1px solid rgba(148, 163, 184, 0.1)",
-                                padding: "20px 24px",
+                                padding: "10px 16px",
                             },
                             head: {
                                 fontWeight: 600,
