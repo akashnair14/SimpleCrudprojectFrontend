@@ -137,3 +137,17 @@ Design Notes
 - All database access is handled through stored procedures
 - Parameterized queries are used to avoid SQL injection
 - Database files are not committed, only schema and procedures are provided
+
+## Application Screenshots
+
+### Employee List
+![Employee List](images/Homepage.png)
+
+### Add Employee
+![Add Employee](images/AddEmployee.png)
+
+### Edit Employee
+![Add Employee](images/EditEmployee.png)
+
+### Swagger API
+![Swagger API](images/API_Swagger.png)
